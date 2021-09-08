@@ -2,6 +2,8 @@
 
 This app is available at https://film-search-service.surge.sh/
 
+![](https://media.giphy.com/media/o2Yqdc9OzlZbTEAjNk/giphy.gif?cid=790b76113a6c95c6cff78d3b9ba6730ccbab17ca12cff45b&rid=giphy.gif&ct=g)
+
 ## Project setup
 ```
 npm install
