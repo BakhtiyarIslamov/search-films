@@ -1,5 +1,7 @@
 # search-films-service
 
+This app is available at https://film-search-service.surge.sh/
+
 ## Project setup
 ```
 npm install
