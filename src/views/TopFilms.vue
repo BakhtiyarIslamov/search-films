@@ -1,6 +1,8 @@
 <template>
-  <div>Top</div>
-  <app-films :api-url="apiUrl" />
+  <div class="container">
+    <p class="category">TOP-250 фильмов</p>
+    <app-films :api-url="apiUrl" />
+  </div>
 </template>
 
 <script>

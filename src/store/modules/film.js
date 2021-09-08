@@ -36,8 +36,8 @@ const actions = {
       filmApi
         .getFilm(filmId)
         .then(response => {
-          contex.commit(mutationTypes.getFilmSuccess, response.data);
-          resolve(response.data);
+          contex.commit(mutationTypes.getFilmSuccess, response);
+          resolve(response);
         })
         .catch(() => {
           contex.commit(mutationTypes.getFilmFailure);

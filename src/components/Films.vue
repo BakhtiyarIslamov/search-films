@@ -1,17 +1,25 @@
 <template>
-  <div v-if="data">
-    <ul>
-      <li v-for="film in data.films" :key="film">
-        <router-link :to="{name: 'film', params: {slug: film.filmId}}">
-          {{ film.nameRu }} &nbsp; {{ film.rating }}
-        </router-link>
-      </li>
-    </ul>
-    <app-pagination
-      :pages-count="data.pagesCount"
-      :current-page="currentPage"
-      :url="baseUrl"
-    />
+  <div>
+    <app-loading v-if="isLoading" />
+    <template v-if="data">
+      <div class="feed">
+        <div v-for="film in data.films" :key="film" class="feed__item item">
+          <router-link :to="{name: 'film', params: {slug: film.filmId}}">
+            <div class="item__poster">
+              <img :src="film.posterUrlPreview" :alt="film.nameRu" />
+              <div class="item__rating">{{ film.rating }}</div>
+            </div>
+            <p class="item__name">{{ film.nameRu }}</p>
+            <p class="item__year">{{ film.year }}</p>
+          </router-link>
+        </div>
+      </div>
+      <app-pagination
+        :pages-count="data.pagesCount"
+        :current-page="currentPage"
+        :url="baseUrl"
+      />
+    </template>
   </div>
 </template>
 
@@ -20,6 +28,7 @@ import {actionTypes} from '@/store/modules/films';
 import {mapState} from 'vuex';
 import AppPagination from '@/components/Pagination';
 import {stringify, parseUrl} from 'query-string';
+import AppLoading from '@/components/Loading';
 
 export default {
   name: 'AppFilms',
@@ -31,6 +40,7 @@ export default {
   },
   components: {
     AppPagination,
+    AppLoading,
   },
   computed: {
     ...mapState({
@@ -68,3 +78,75 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.feed {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  &__item {
+    flex: 0 1 0;
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(
+      to right bottom,
+      rgba(255, 255, 255, 0.7),
+      rgba(255, 255, 255, 0.1)
+    );
+    border-radius: 2rem;
+    transition: 0.5s;
+    position: relative;
+    top: 0px;
+
+    &:hover {
+      top: 2px;
+      background-color: #0090a7;
+    }
+  }
+}
+
+.item {
+  &__poster {
+    position: relative;
+    margin: auto;
+    width: 250px;
+    height: 375px;
+    border-radius: 1.5rem;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__rating {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 10px;
+    left: 10px;
+    height: 50px;
+    width: 50px;
+    opacity: 90%;
+    background: #fff;
+    border: 2px solid #000;
+    border-radius: 50%;
+  }
+
+  &__name {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 5px 0px;
+  }
+
+  &__year {
+    margin: 5px 0px;
+  }
+}
+</style>
