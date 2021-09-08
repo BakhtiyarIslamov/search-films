@@ -1,6 +1,6 @@
 # search-films-service
 
-This app is available at https://film-search-service.surge.sh/
+This app is available at https://search-films-service.surge.sh/
 
 ![Alt text](https://i.giphy.com/media/o2Yqdc9OzlZbTEAjNk/giphy.webp)
 
